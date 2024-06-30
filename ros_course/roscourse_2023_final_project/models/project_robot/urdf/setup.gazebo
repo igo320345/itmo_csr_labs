@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<robot>
+    <!-- <arg name="nas" default="project_robot_888888"/> -->
+    <gazebo reference="base">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="wheel_up_left">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="wheel_up_right">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+        <gazebo reference="wheel_down_left">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="wheel_down_right">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="lidar">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/project_robot_888888</robotNamespace>
+        </plugin>
+    </gazebo>
+       
+    <gazebo reference="lidar">
+        <sensor type="ray" name="lidar_main">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>40</update_rate>
+        <ray>
+            <scan>
+            <horizontal>
+                <samples>9</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.7853</min_angle>
+                <max_angle>0.7853</max_angle>
+            </horizontal>
+            </scan>
+            <range>
+            <min>0.3</min>
+            <max>2</max>
+            <resolution>0.01</resolution>
+            </range>
+            <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+            </noise>
+        </ray>
+        <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+            <topicName>project_robot_888888/lidar_main</topicName>
+            <frameName>lidar</frameName>
+        </plugin>
+        </sensor>
+    </gazebo>
+</robot>

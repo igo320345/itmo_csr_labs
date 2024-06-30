@@ -1,0 +1,62 @@
+<?xml version='1.0'?>
+<robot name="project_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<xacro:property name="pack" value="roscourse_2023_project_scene" />
+
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/materials.xacro" />
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/wheel.xacro" />
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/inertial.urdf.xacro" />
+<xacro:include filename="$(find ${pack})/models/project_robot/urdf/setup.gazebo" />
+
+<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+
+    <link name='base'>
+
+        <visual name='base_visual'>
+            <origin xyz="0.033 -0.025 -0.05" rpy=" 0 0 ${-pi/2}"/>
+            <geometry>
+                <mesh filename="$(find ${pack})/models/Subaru_Impreza.stl" scale="0.08 0.1 0.11"/>
+            </geometry>
+                <material name="orange"/>
+        </visual>
+        
+        <xacro:inertial_box mass="6" x="0.2" y="0.30" z="0.12" >
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </xacro:inertial_box>
+
+        <collision>
+            <origin xyz="0.0 0.0 0.02" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="0.2 0.36 0.14 "/>
+                </geometry>
+        </collision>
+
+    </link>
+
+    <link name="lidar">
+
+        <visual name='lidar_visual'>
+            <origin xyz="0 0 0" rpy=" 0 0 0"/>
+            <geometry>
+                <box size=".025 .025 .025"/>
+            </geometry>
+                <material name="red"/>
+        </visual>
+
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+
+        <origin xyz="0 0.15 0.0" rpy="0 0 ${pi/2}"/>
+        <child link="lidar"/>
+        <parent link="base"/>
+
+    </joint>
+
+    <xacro:wheel side="up_left" x="0.1" y="0.09" z="0.0" sign="1" sign2="2"/> 
+    <xacro:wheel side="up_right" x="0.1" y="0.09" z="0.0" sign="-1" sign2="1"/>
+    
+    <xacro:wheel side="down_left" x="0.1" y="-0.09" z="0.0" sign="1" sign2="2"/>
+    <xacro:wheel side="down_right" x="0.1" y="-0.09" z="0.0" sign="-1" sign2="1"/> 
+    
+</robot>

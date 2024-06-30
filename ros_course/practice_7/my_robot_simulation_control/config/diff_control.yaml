@@ -1,0 +1,14 @@
+diff_drive_robot:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+  # Velocity Controllers ---------------------------------------
+  left_wheel_controller:
+    type: effort_controllers/JointVelocityController
+    joint: wheel_left_joint
+    pid: {p: 10, i: 0.0, d: 0.0}
+  right_wheel_controller:
+    type: effort_controllers/JointVelocityController
+    joint: wheel_right_joint
+    pid: {p: 10, i: 0.0, d: 0.0}

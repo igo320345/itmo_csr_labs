@@ -1,0 +1,37 @@
+<package format="2">
+  <version>1.0.0</version>
+  <name>roscourse_2023_project_scene</name>
+  <description>Gazebo example for ITMO ROS couse project</description>
+
+  <author     email="likerobotics@gmail.com">Islam Bzhikhatlov</author>
+  <maintainer email="likerobotics@gmail.com">Islam Bzhikhatlov</maintainer>
+
+  <license>Apache License, Version 2.0</license>
+
+  <url type="website">https://likerobotics.ru/ros_course</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>controller_manager</build_depend>
+  <build_depend>joint_state_controller</build_depend>
+
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>controller_manager</build_export_depend>
+  <build_export_depend>joint_state_controller</build_export_depend>
+
+  <exec_depend>roscpp</exec_depend>  
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>joint_state_controller</exec_depend>
+
+  <export>
+    <!-- <gazebo_ros gazebo_model_path="~/catkin_ws/src/roscourse_2023_project_scene/models"/> -->
+  </export>
+
+</package>

@@ -1,0 +1,83 @@
+<?xml version='1.0'?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+
+    <xacro:include filename="$(find my_firts_robot_model)/urdf/materials.xacro" />
+    <xacro:include filename="$(find my_firts_robot_model)/urdf/wheel.xacro" />
+    
+    <link name='base_link'> 
+        <visual name='base_visual'>
+            <origin xyz="0.0 0.0 0.0" rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <box size="0.2 2 1.3"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <link name='link_1'>
+        <visual name='link_1_visual'>
+            <origin xyz='0 0 0' rpy='0 0 0'/>
+            <geometry>
+                <cylinder length='0.2' radius='0.05'/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name='revolute_joint_1' type='revolute'>
+        <origin xyz='0 0 0.21' rpy='0 0 0'/>
+        <limit effort="1000.0" lower="${-pi}" upper='${pi}' velocity="0.5"/>
+        <child link='link_1'/>
+        <axis xyz='0 0 1'/>
+        <parent link='base_link'/>
+    </joint>
+
+    <link name='joint_1'>
+        <visual name='joint_1_visual'>
+            <origin xyz='0 0 0' rpy='0 0 0'/>
+            <geometry>
+                <cylinder length='0.1' radius='0.05'/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name='revolute_joint_2' type='revolute'>
+        <origin xyz='0 0 0.155' rpy='0 ${3*pi/2} 0'/>
+        <limit effort="1000.0" lower="${-pi/2}" upper='${pi/2}' velocity="0.5"/>
+        <child link='joint_1'/>
+        <parent link='link_1'/>
+        <axis xyz='0 0 1'/>
+    </joint>
+
+    <link name='link_2'>
+        <visual name='link_2_visual'>
+            <origin xyz='0 0 0' rpy='0 0 0'/>
+            <geometry>
+                <cylinder length='0.2' radius='0.05'/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name='link_2_joint' type='fixed'>
+        <origin xyz='0.155 0 0' rpy='0 ${pi/2} 0'/>
+        <child link='link_2'/>
+        <parent link='joint_1'/>
+    </joint>
+
+    <link name='link_3'>
+        <visual name='link_3_visual'>
+            <origin xyz='0 0 0' rpy='0 0 0'/>
+            <geometry>
+                <cylinder length='0.2' radius='0.025'/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name='prismatic_joint_1' type='prismatic'>
+        <origin xyz='0 0 0.1' rpy='0 0 0'/>
+        <axis xyz='0 0 1'/>
+        <limit effort="1000.0" lower="0" upper="0.1" velocity="0.5"/>
+        <child link='link_3'/>
+        <parent link='link_2'/>
+    </joint>
+
+    <xacro:wheel side="left" x="-0.676" y="0" z="-0.1" />
+    <xacro:wheel side="right" x="0.676" y="0" z="-0.1" />
+
+</robot>

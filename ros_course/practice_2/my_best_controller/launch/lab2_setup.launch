@@ -1,0 +1,10 @@
+<launch>
+    <group ns="ns1_368912">
+        <node name="turtlesim_node" pkg="turtlesim" type="turtlesim_node"></node>
+        <node name="lab2_controller" pkg="my_best_controller" type="lab2_controller.py"></node>
+    </group>
+    <group ns="ns2_368912">
+        <node name="turtlesim_node" pkg="turtlesim" type="turtlesim_node"></node>
+        <node name="lab2_controller" pkg="my_best_controller" type="lab2_controller.py"></node>
+    </group>
+</launch>

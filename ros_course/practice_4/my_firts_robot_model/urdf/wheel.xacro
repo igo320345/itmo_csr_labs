@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<xacro:macro name="wheel" params="side x y z">
+    <link name='wheel_${side}'>
+        <visual name='wheel_${side}_visual'>
+            <origin xyz="0 0 0" rpy=" 0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.1"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+    </link>
+    <joint name="wheel_${side}_joint" type="continuous">
+        <origin xyz="${x} ${y} ${z}" rpy="${pi/2} 0 ${pi/2}"/>
+        <child link="wheel_${side}"/>
+        <axis xyz="0 0 1"/>
+        <parent link="base_link"/>
+    </joint>
+</xacro:macro>
+</robot>

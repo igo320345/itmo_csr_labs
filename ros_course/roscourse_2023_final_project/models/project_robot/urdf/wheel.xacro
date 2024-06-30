@@ -1,0 +1,59 @@
+<?xml version='1.0'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="wheel" params="side x y z sign sign2">
+
+        <xacro:property name="pack" value="roscourse_2023_project_scene" />
+
+        <link name='wheel_${side}'>
+
+            <visual name='wheel_${side}_visual'>
+            <origin xyz="${(sign*0.1)/8} 0 0" rpy="${sign2*pi} 0 ${pi/2}"/>
+            <geometry>
+            <mesh filename="$(find ${pack})/models/Wheel.stl" scale="0.0043 0.002 0.0043"/>
+            </geometry>
+                <material name="black"/>
+            </visual>
+
+            <xacro:inertial_cylinder mass="1" length="${(0.1)/4}" radius="${0.15/2}">
+                <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
+            </xacro:inertial_cylinder>
+
+            <collision>
+               <origin xyz="${(sign*0.1)/8} 0 0" rpy="0 ${pi/2} 0"/>
+                <geometry>
+                    <cylinder length="${(0.1)/4}" radius="${0.15/2}"/>
+                </geometry>
+            </collision>
+
+        </link>
+         
+        <joint name="wheel_${side}_joint" type="continuous">
+
+            <origin xyz="${x*sign} ${y} ${z}" rpy="0 0 0"/>
+            <axis xyz="1 0 0" />
+                <limit effort="100" velocity="50"/>
+                <joint_properties damping="0.5" friction="0.1"/>
+            <child link="wheel_${side}"/>
+            <parent link="base"/>
+
+        </joint>
+
+        <transmission name="wheel_${side}_trans">
+
+            <type>transmission_interface/SimpleTransmission</type>
+            
+            <joint name="wheel_${side}_joint">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            </joint>
+
+            <actuator name="wheel_${side}_motor">
+                <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+
+        </transmission>
+
+    </xacro:macro>
+
+</robot>

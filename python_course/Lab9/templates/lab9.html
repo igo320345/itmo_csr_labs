@@ -1,0 +1,24 @@
+<!doctype html>
+<title>Телефонная книга</title>
+<body background="https://memepedia.ru/wp-content/uploads/2020/06/nu-che-tam-s-dengami-prank.jpg">
+    <h1 style="color: white;">Телефонная книга</h1>
+
+    <form action="/find" method="post">
+        <input type="text" name="name" placeholder="Name">
+        <input type="tel" name="telephone" placeholder="Telephone">
+        <button type="submit">Найти</button>
+    </form>
+
+    <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Name">
+        <input type="tel" name="telephone" placeholder="Telephone">
+        <button type="submit">Добавить</button>
+    </form>
+
+    {% if entities %}
+        {% for entity in entities %}
+            <p style="color: red;">{{ entity.name }} {{ entity.telephone }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+
