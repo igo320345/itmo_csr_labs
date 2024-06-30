@@ -5,7 +5,7 @@
 ## 2 семестр
 - [Программирование на Python](python_course/)
 ## 3 семестр
-- [Практическа линейная алгебра](practical_linear_algebra/)
+- [Практическая линейная алгебра](practical_linear_algebra/)
 - [Численные методы](num_methods/)
 - [Операционная система ROS](ros_course/)
 ## 4 семестр
